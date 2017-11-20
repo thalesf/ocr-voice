@@ -1,0 +1,31 @@
+html {
+    /*font-size: 62.5%;*/
+}
+
+body {
+    font-size: 1.6rem;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.input-group {
+    margin-top: 10px;
+}
+#run,
+#send,
+#stop {
+    cursor: pointer;
+}
+
+#result {
+    width: 500px;
+    height: 270px;
+    margin-top: 20px;
+}
+
+.progress {
+    margin-top: 10px;
+}

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br" dir="ltr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tesseract OCR and Responsive Voice</title>
+    <title>Tesseract OCR Reader</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
         crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <script src='https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js'></script>
     <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
 </head>
@@ -51,87 +51,6 @@
 
 </body>
 
-<script>
-
-    /*Regular Express Url Validator*/
-    function UrlValidator(url) {
-        var expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})/;
-        var regex = new RegExp(expression);
-        var urlString = "" + url;
-
-        if (urlString.match(regex)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    /*Run Tesseract */
-    function readImage(url) {
-        let textarea = document.getElementById('result');
-        Tesseract.recognize(url)
-            .then(function (result) {
-                let textarea = document.getElementById('result');
-                let node = document.createTextNode(result.text);
-                textarea.appendChild(node);
-            }).progress(function (progress) {
-                let total = (progress["progress"] * 100);
-                total = Math.round(total, -1);
-                let progressbar = document.querySelector('.progress-bar');
-                progressbar.setAttribute('aria-valuenow', total);
-                progressbar.style.width = total + "%";
-                progressbar.textContent = total + "%";
-            });
-    }
-
-
-    send.onclick = function () {
-        let url = document.getElementById('link').value;
-        if (UrlValidator(url) === true)
-            readImage(url);
-        else
-            console.log("Invalid Url");
-    }
-
-    run.onclick = function () {
-        let text = document.getElementById('result').value;
-        responsiveVoice.setDefaultVoice("US English Female");
-        responsiveVoice.speak(text);
-    }
-
-</script>
-
-<style>
-    html {
-        /*font-size: 62.5%;*/
-    }
-
-    body {
-        font-size: 1.6rem;
-    }
-
-    .container {
-        margin: 0 auto;
-        padding: 10px;
-    }
-
-    .input-group {
-        margin-top: 10px;
-    }
-    #run,
-    #send,
-    #stop {
-        cursor: pointer;
-    }
-
-    #result {
-        width: 500px;
-        height: 270px;
-        margin-top: 20px;
-    }
-
-    .progress {
-        margin-top: 10px;
-    }
-</style>
+<script src="script.js"></script>
 
 </html>
